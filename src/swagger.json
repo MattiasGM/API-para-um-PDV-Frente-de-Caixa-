@@ -1,0 +1,779 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Desafio M05",
+    "description": "API para um PDV (Frente de Caixa)",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de test"
+    },
+    {
+      "url": "https://desafio-backend-final-dds-t16.onrender.com",
+      "description": "API de produção"
+    }
+  ],
+  "paths": {
+    "/categoria": {
+      "get": {
+        "description": "Essa rota será responsável por listar as categorias.",
+        "summary": "Listar Categorias",
+        "tags": ["Categoria"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        }
+      }
+    },
+
+    "/login": {
+      "post": {
+        "description": "Essa rota será responsável por logar o usuário.",
+        "summary": "Login Usuário",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "400": {
+            "description": "requisição mal sucedida."
+          },
+          "404": {
+            "description": "não encontrado"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login_Usuario"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/usuario": {
+      "post": {
+        "description": "Essa rota será responsável por cadastrar novo usuário.",
+        "summary": "Cadastrar Usuário",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "sucesso, algo foi criado"
+          },
+          "409": {
+            "description": "conflito"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Essa rota será responsável por detalhar usuário logado.",
+        "summary": "Detalhar Perfil Logado",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Essa rota será responsável por editar usuário logado.",
+        "summary": "Editar Perfil Logado",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "sucesso, No Content"
+          },
+          "409": {
+            "description": "conflito"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+
+    "/usuario/redefinir": {
+      "patch": {
+        "description": "Essa rota será responsável por redefinir a senha do usuario.",
+        "summary": "Redefinir Senha",
+        "tags": ["Usuario"],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "sucesso, algo foi criado"
+          },
+          "400": {
+            "description": "requisição mal sucedida."
+          },
+          "404": {
+            "description": "não encontrado"
+          },
+          "409": {
+            "description": "conflito"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Redefinir_Senha"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+
+    "/produto": {
+      "post": {
+        "description": "Essa rota será responsável por cadastrar novo produto.",
+        "summary": "Cadastrar Produto",
+        "tags": ["Produto"],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "sucesso, algo foi criado"
+          },
+          "404": {
+            "description": "categoria não encontrada"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável listar todos os produtos.",
+        "summary": "Listar produtos",
+        "tags": ["Produto"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "400": {
+            "description": "requisição mal sucedida."
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/produto/{id}": {
+      "put": {
+        "description": "Essa rota será responsável por editar produto.",
+        "summary": "Editar Produto",
+        "tags": ["Produto"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "sucesso, No Content"
+          },
+          "404": {
+            "description": "requisição mal sucedida."
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável por detalhar produto por id.",
+        "summary": "Detalhar Produto por Id",
+        "tags": ["Produto"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "404": {
+            "description": "não encontrado"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Essa rota será responsável por deletar produto.",
+        "summary": "Deletar Produto",
+        "tags": ["Produto"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "sucesso, No Content"
+          },
+          "404": {
+            "description": "produto não encontrado"
+          },
+          "409": {
+            "description": "conflito"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+
+    "/produto/{id}/imagem": {
+      "patch": {
+        "description": "Essa rota será responsável por fazer upload de imagem do produto.",
+        "summary": "Upload de imagem",
+        "tags": ["Produto"],
+        "parameters": [{
+          "name": "id",
+          "description": "",
+          "in": "path",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "example": "1"
+        }],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "400": {
+            "description": "requisição mal sucedida."
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Upload_Imagem"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    
+    "/cliente": {
+      "post": {
+        "description": "Essa rota será responsável cadastrar um novo cliente.",
+        "summary": "Cadastrar Cliente",
+        "tags": ["Cliente"],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "sucesso, algo foi criado"
+          },
+          "400": {
+            "description": "requisição mal sucedida."
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cliente"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável listar clientes.",
+        "summary": "Listar Clientes",
+        "tags": ["Cliente"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "404": {
+            "description": "cliente não encontrado"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/cliente/{id}": {
+      "put": {
+        "description": "Essa rota será responsável Editar os dados do cliente.",
+        "summary": "Editar Dados Cliente",
+        "tags": ["Cliente"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "sucesso, No Content"
+          },
+          "404": {
+            "description": "cliente não encontrado"
+          },
+          "400": {
+            "description": "requisição mal sucedida."
+          },
+          "409": {
+            "description": "conflito, email ou cpf já existe no banco de dados"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref":"#/components/schemas/Cliente"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável detalhar cliente.",
+        "summary": "Detalhar Cliente",
+        "tags": ["Cliente"],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "404": {
+            "description": "cliente não encontrado"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+
+    "/pedido": {
+      "post": {
+        "description": "Essa rota será responsável cadastrar um novo pedido.",
+        "summary": "Cadastrar Pedido",
+        "tags": ["Pedido"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "400": {
+            "description": "requisição mal sucedida."
+          },
+          "404": {
+            "description": "cliente não encontrado"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pedido"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Essa rota será responsável por listar os pedidos.",
+        "summary": "Listar Pedidos",
+        "tags": ["Pedido"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "sucesso, OK"
+          },
+          "404": {
+            "description": "cliente não encontrado"
+          },
+          "500": {
+            "description": "Erro do servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+
+  "tags": ["Categoria", "Cliente", "Pedido", "Produto", "Usuario"],
+  "components": {
+    "schemas": {
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "nome": "Test1",
+          "email": "test1@email.com",
+          "senha": "12345678"
+        }
+      },
+      "Login_Usuario": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "test1@email.com",
+          "senha": "12345678"
+        }
+      },
+      "Redefinir_Senha": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "senha_antiga": {
+            "type": "string"
+          },
+          "senha_nova": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "jonathansilva@email.com",
+          "senha_antiga": "12345678",
+          "senha_nova": "123456789"
+        }
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "quantidade_estoque": {
+            "type": "integer"
+          },
+          "valor": {
+            "type": "integer"
+          },
+          "categoria_id": {
+            "type": "integer"
+          }
+        },
+        "example": {
+          "descricao": "Mouse Gamer",
+          "quantidade_estoque": 1,
+          "valor": 10000,
+          "categoria_id": 1
+        } 
+      },
+      "Upload_Imagem": {
+        "type": "object",
+        "properties": {
+          "imagem": {
+            "type": "string",
+            "format": "binary",
+            "description": "Arquivo de imagem"
+          }
+        }
+      },
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "rua": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "bairro": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "nome": "João",
+          "email": "joao@email.com",
+          "cpf": "990.801.660-14",
+          "rua": "Rua A",
+          "numero": "1",
+          "bairro": "Bangu",
+          "cidade": "Rio de Janeiro",
+          "estado": "RJ"
+        }
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "cliente_id": {
+            "type": "integer"
+          },
+          "observacao": {
+            "type": "string"
+          },
+          "pedido_produtos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "produto_id": {
+                  "type": "integer"
+                },
+                "quantidade_produto": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "cliente_id": 1,
+          "observacao": "Entragar no vizinho ao lado",
+          "pedido_produtos": [
+            {
+              "produto_id": 5,
+              "quantidade_produto": 1
+            }
+          ]
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
