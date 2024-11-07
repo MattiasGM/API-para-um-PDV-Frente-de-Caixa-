@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Desafio M05",
+    "title": "PDV",
     "description": "API para um PDV (Frente de Caixa)",
     "version": "1.0.0"
   },
@@ -11,7 +11,7 @@
       "description": "API de test"
     },
     {
-      "url": "https://desafio-backend-final-dds-t16.onrender.com",
+      "url": "<Insira seu link de produção>",
       "description": "API de produção"
     }
   ],
