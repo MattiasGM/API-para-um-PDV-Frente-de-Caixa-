@@ -12,7 +12,9 @@ npm run dev
 
 Após iniciar o modo de desenvolvimento, você pode acessar a documentação Swagger pelo seguinte link:
 
-[Documentação Swagger](http://localhost:3000/doc)
+```
+http://localhost:3000/doc
+```
 
 ## Produção
 
