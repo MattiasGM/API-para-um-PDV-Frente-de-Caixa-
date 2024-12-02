@@ -26,8 +26,8 @@ npm start
 
 ## Requisitos
 
-- Node.js >= 22
-- npm >= 10
+- Node.js >= 16
+- npm >= 8
 
 ## Instalação
 
