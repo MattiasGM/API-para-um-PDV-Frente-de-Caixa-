@@ -44,6 +44,18 @@ npm install
 - Node.js
 - Express
 - Swagger
+- AWS SDK (S3)
+- Bcrypt
+- CORS
+- CPF/CNPJ Validator
+- Dotenv
+- Joi
+- JSON Web Token (JWT)
+- Knex
+- Multer
+- Nodemailer
+- PostgreSQL
+
 
 ## Como Contribuir
 
