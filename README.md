@@ -1,4 +1,3 @@
-\```
 # Projeto PDV
 
 Este projeto é um sistema de Ponto de Venda (PDV) desenvolvido para facilitar a gestão de vendas em estabelecimentos comerciais.
@@ -53,4 +52,3 @@ npm install
 5. Abra um Pull Request
 
 ---
-\```
