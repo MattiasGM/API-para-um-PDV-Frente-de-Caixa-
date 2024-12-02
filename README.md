@@ -6,9 +6,9 @@ Este projeto é um sistema de Ponto de Venda (PDV) desenvolvido para facilitar a
 
 Para executar o modo de desenvolvimento, use o seguinte comando no terminal:
 
-\```bash
+```bash
 npm run dev
-\```
+```
 
 Após iniciar o modo de desenvolvimento, você pode acessar a documentação Swagger pelo seguinte link:
 
@@ -18,9 +18,9 @@ Após iniciar o modo de desenvolvimento, você pode acessar a documentação Swa
 
 Para executar o projeto em modo de produção, utilize o comando abaixo:
 
-\```bash
+```bash
 npm start
-\```
+```
 
 ## Requisitos
 
@@ -31,11 +31,11 @@ npm start
 
 Clone o repositório e instale as dependências:
 
-\```bash
+```bash
 git clone https://github.com/seuusuario/projeto-pdv.git
 cd projeto-pdv
 npm install
-\```
+```
 
 ## Tecnologias Utilizadas
 
